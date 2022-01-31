@@ -1,4 +1,4 @@
-package com.kyoungae.ohnaeused
+package com.kyoungae.ohnaejunggo
 
 import org.junit.Test
 

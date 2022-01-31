@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# kakao login
+#-keep class com.kakao.sdk.**.model.* { <fields>; }
+#-keep class * extends com.google.gson.TypeAdapter
+
+-keep public class com.nhn.android.naverlogin.** {
+       public protected *;
+}

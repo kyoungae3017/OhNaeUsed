@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_home"
+        android:title="홈"
+        android:icon="@drawable/ic_home"/>
+    <item android:id="@+id/action_chatting"
+        android:title="채팅"
+        android:icon="@drawable/ic_chat"/>
+    <item android:id="@+id/action_my"
+        android:title="내정보"
+        android:icon="@drawable/ic_my"/>
+</menu>

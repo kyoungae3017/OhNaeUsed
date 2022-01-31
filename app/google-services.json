@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "414017655079",
+    "project_id": "ohnaeused",
+    "storage_bucket": "ohnaeused.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414017655079:android:7bb4553bb9533b6df99902",
+        "android_client_info": {
+          "package_name": "com.kyoungae.ohnaejunggo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414017655079-emilbepvk9rvq3sr4um1vf6ii654jbpm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8IdWLPz62QJfoe6f6BiFM4XJWyPP4_IE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414017655079-emilbepvk9rvq3sr4um1vf6ii654jbpm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414017655079:android:79183da81dce5a62f99902",
+        "android_client_info": {
+          "package_name": "com.kyoungae.ohnaeused"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414017655079-emilbepvk9rvq3sr4um1vf6ii654jbpm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8IdWLPz62QJfoe6f6BiFM4XJWyPP4_IE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414017655079-emilbepvk9rvq3sr4um1vf6ii654jbpm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
