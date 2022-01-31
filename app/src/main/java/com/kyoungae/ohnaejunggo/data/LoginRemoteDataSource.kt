@@ -3,6 +3,8 @@ package com.kyoungae.ohnaejunggo.data
 import android.app.Activity
 import android.content.Context
 import android.util.Log
+import android.util.LogPrinter
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.gson.Gson
@@ -21,7 +23,7 @@ import kotlin.coroutines.resume
 
 class LoginRemoteDataSource @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val firestore: FirebaseFirestore
+    private val firestore: FirebaseFirestore,
 ) {
 
     private val clientId = "Ygxw6hwRthKRZp5Rww5t"
@@ -87,8 +89,8 @@ class LoginRemoteDataSource @Inject constructor(
     /**
      * 저장되있는 유저 정보 가져오기
      */
-    suspend fun getUser(loginType: LoginType, userId: String): User? {
-        val result = suspendCancellableCoroutine<User?> { cont ->
+    suspend fun getUser(loginType: LoginType, userId: String): DocumentSnapshot? {
+        val result = suspendCancellableCoroutine<DocumentSnapshot?> { cont ->
             firestore.collection(USER)
                 .whereEqualTo("loginType", loginType)
                 .whereEqualTo("id", userId)
@@ -96,8 +98,7 @@ class LoginRemoteDataSource @Inject constructor(
                 .get()
                 .addOnSuccessListener {
                     if (it.documents.size > 0) {
-                        Log.d(TAG, "getUser:ddddddddd ${it.documents.size}")
-                        val user = it.documents[0].toObject<User>()
+                        val user = it.documents[0]
                         cont.resume(user)
                     } else {
                         cont.resume(null)

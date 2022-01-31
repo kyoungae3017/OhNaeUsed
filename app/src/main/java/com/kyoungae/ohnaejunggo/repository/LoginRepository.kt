@@ -2,6 +2,7 @@ package com.kyoungae.ohnaejunggo.repository
 
 import android.app.Activity
 import android.content.Context
+import com.google.firebase.firestore.ktx.toObject
 import com.kyoungae.ohnaejunggo.LoginType
 import com.kyoungae.ohnaejunggo.data.LoginLocalDataSource
 import com.kyoungae.ohnaejunggo.data.LoginRemoteDataSource
@@ -14,7 +15,6 @@ import javax.inject.Inject
 class LoginRepository @Inject constructor(
     @ApplicationContext private val context: Context,
     private val loginLocalDataSource: LoginLocalDataSource,
-    private val userRemoteDataSource: UserRemoteDataSource,
     private val loginRemoteDataSource: LoginRemoteDataSource,
 ) {
 
@@ -26,16 +26,19 @@ class LoginRepository @Inject constructor(
         loginLocalDataSource.editLoginId(loginId)
     }
 
-    suspend fun initNaverLogin(activity: Activity): Boolean{
+    suspend fun initNaverLogin(activity: Activity): Boolean {
         return loginRemoteDataSource.initNaverLogin(activity)
     }
 
-    suspend fun getProfile(): User?{
+    suspend fun getProfile(): User? {
         return loginRemoteDataSource.getProfile()
     }
 
     suspend fun getUser(loginType: LoginType, userId: String): User? {
-        return loginRemoteDataSource.getUser(loginType, userId)
+        val documentData = loginRemoteDataSource.getUser(loginType, userId)
+        documentData ?: return null
+        saveLoginStatus(documentData.id)
+        return documentData.toObject<User>()
     }
 
     companion object {
