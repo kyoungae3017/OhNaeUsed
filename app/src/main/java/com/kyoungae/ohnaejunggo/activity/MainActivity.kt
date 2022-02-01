@@ -29,14 +29,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
+        setSupportActionBar(binding.toolbar)
 
         val appBarConfiguration = AppBarConfiguration(
-            topLevelDestinationIds = setOf(R.id.splashFragment, R.id.loginFragment, R.id.mainFragment),
+            topLevelDestinationIds = setOf(
+                R.id.splashFragment,
+                R.id.loginFragment,
+                R.id.mainFragment
+            ),
         )
-            binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
 }
