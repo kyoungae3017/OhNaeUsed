@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_writing_product"
+    app:startDestination="@id/productWritingFragment">
+
+    <fragment
+        android:id="@+id/productWritingFragment"
+        android:name="com.kyoungae.ohnaejunggo.fragment.ProductWritingFragment"
+        android:label="ProductWritingFragment" >
+        <action
+            android:id="@+id/action_productWritingFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" >
+        </action>
+        <argument android:name="pick_count"
+            app:argType="integer"
+            android:defaultValue="5"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.kyoungae.ohnaejunggo.fragment.GalleryFragment"
+        android:label="GalleryFragment" >
+        <argument android:name="pick_count"
+            app:argType="integer"
+            android:defaultValue="5"/>
+    </fragment>
+</navigation>

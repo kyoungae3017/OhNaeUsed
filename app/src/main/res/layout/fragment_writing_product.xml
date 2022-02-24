@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/parent_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/margin_20dp">
+
+                <LinearLayout
+                    android:id="@+id/camera_button"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginRight="@dimen/margin_10dp"
+                    android:background="@drawable/rectangle_gray"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_5dp"
+                        android:src="@drawable/ic_camera" />
+
+                    <TextView
+                        android:id="@+id/photo_count"
+                        style="@style/TextMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/camera_count" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/image_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </LinearLayout>
+
+            <include layout="@layout/view_line" />
+
+            <EditText
+                android:id="@+id/title"
+                style="@style/TextMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="제목"
+                android:maxLines="1"
+                android:paddingTop="@dimen/margin_20dp"
+                android:paddingBottom="@dimen/margin_20dp" />
+
+            <include layout="@layout/view_line" />
+
+            <EditText
+                android:id="@+id/price"
+                style="@style/TextMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/price"
+                android:inputType="number"
+                android:maxLength="8"
+                android:paddingTop="@dimen/margin_20dp"
+                android:paddingBottom="@dimen/margin_20dp" />
+
+            <include layout="@layout/view_line" />
+
+            <EditText
+                android:id="@+id/explanation"
+                style="@style/TextMedium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="top|left"
+                android:hint="거래 할 물품에 대해 설명해주세요."
+                android:paddingTop="@dimen/margin_20dp"
+                android:paddingBottom="@dimen/margin_20dp" />
+
+        </LinearLayout>
+        <ProgressBar
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+</layout>

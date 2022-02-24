@@ -10,6 +10,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.gson.Gson
 import com.kyoungae.ohnaejunggo.LoginType
 import com.kyoungae.ohnaejunggo.data.naverlogin.ProfileResponse
+import com.kyoungae.ohnaejunggo.util.CommonUtil
 import com.kyoungae.ohnaejunggo.util.USER
 import com.nhn.android.naverlogin.OAuthLogin
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -77,7 +78,7 @@ class LoginRemoteDataSource @Inject constructor(
 
                 if (profileApi == null) cont.resume(null)
                 val profile = gson.fromJson(profileApi, ProfileResponse::class.java).response
-                val user = User(LoginType.NAVER, profile.id, profile.nickname, profile.mobile, null)
+                val user = User(LoginType.NAVER, profile.id, profile.nickname, profile.mobile, null,null,CommonUtil.getCurrentTime())
                 cont.resume(user)
             } catch (e: Exception) {
                 cont.resume(null)

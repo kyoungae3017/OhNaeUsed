@@ -8,5 +8,9 @@
         android:layout_height="match_parent"
         tools:context=".fragment.SplashFragment">
 
+        <include
+            android:id="@+id/view_toolbar"
+            layout="@layout/view_toolbar" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

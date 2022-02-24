@@ -1,7 +1,6 @@
 package com.kyoungae.ohnaejunggo.fragment
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,31 +14,34 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.kyoungae.ohnaejunggo.activity.MainActivity
 import com.kyoungae.ohnaejunggo.R
-import com.kyoungae.ohnaejunggo.activity.SubActivity
-import com.kyoungae.ohnaejunggo.databinding.FragmentHomeBinding
 import com.kyoungae.ohnaejunggo.databinding.FragmentMyBinding
 import com.kyoungae.ohnaejunggo.databinding.FragmentSplashBinding
 import com.kyoungae.ohnaejunggo.util.CommonUtil
-import com.kyoungae.ohnaejunggo.util.GRAPH_ID
 import com.kyoungae.ohnaejunggo.viewmodel.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class MyFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var mainActivity: MainActivity
+    private lateinit var binding: FragmentMyBinding
     private val viewModel: SplashViewModel by viewModels()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return DataBindingUtil.inflate<FragmentHomeBinding>(
+        return DataBindingUtil.inflate<FragmentMyBinding>(
             inflater,
-            R.layout.fragment_home,
+            R.layout.fragment_my,
             container,
             false
         ).apply {
@@ -49,17 +51,18 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.viewToolbar.toolbar.setTitle(R.string.app_name)
-        binding.floatingActionButton.setOnClickListener {
-            goToLoginFragment()
-        }
+        binding.viewToolbar.toolbar.setTitle(R.string.my)
     }
 
+
     private fun goToLoginFragment() {
-        val intent = Intent(context, SubActivity::class.java).apply {
-            putExtra(GRAPH_ID, R.navigation.nav_graph_writing_product)
-        }
-        startActivity(intent)
+        val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun goToMainFragment() {
+        val action = SplashFragmentDirections.actionSplashFragmentToMainFragment()
+        findNavController().navigate(action)
+
     }
 }

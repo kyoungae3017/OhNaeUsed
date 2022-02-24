@@ -43,9 +43,7 @@ class LoginViewModel @Inject constructor(
                         if (getServerUserData != null) {
                             changeSucceedLoginData(this, true)
                         } else {
-                            naverUserData.apply {
-                                createDate = Date()
-                            }
+
                             changeSucceedLoginData(this, userRepository.insertUser(naverUserData))
                         }
                     } else {

@@ -8,14 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.kyoungae.ohnaejunggo.R
 import com.kyoungae.ohnaejunggo.activity.MainActivity
 import com.kyoungae.ohnaejunggo.databinding.FragmentMainBinding
+import com.kyoungae.ohnaejunggo.viewmodel.MainViewModel
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
+    private val viewModel: MainViewModel by viewModels()
+    private var fragment : Fragment = HomeFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,28 +42,24 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setFragment(HomeFragment())
+        setFragment(fragment)
 
         binding.bottomNav.setOnItemSelectedListener {
-
             when (it.itemId) {
                 R.id.home -> {
-                    setFragment(HomeFragment())
-                    setToolbarTitle(R.string.app_name)
+                    fragment = HomeFragment()
                 }
                 R.id.chatting -> {
-                    setFragment(ChattingFragment())
-                    setToolbarTitle(R.string.chatting)
+                    fragment = ChattingFragment()
                 }
                 R.id.my -> {
-                    setFragment(MyFragment())
-                    setToolbarTitle(R.string.my)
+                    fragment = MyFragment()
                 }
                 else -> {
-                    setFragment(HomeFragment())
-                    setToolbarTitle(R.string.app_name)
+                    fragment = HomeFragment()
                 }
             }
+            setFragment(fragment)
             true
         }
     }
@@ -66,8 +69,7 @@ class MainFragment : Fragment() {
             .replace(R.id.fragment_container, fragment).commit()
     }
 
-    private fun setToolbarTitle(resId: Int) {
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = resources.getString(resId)
-    }
+
+
 
 }

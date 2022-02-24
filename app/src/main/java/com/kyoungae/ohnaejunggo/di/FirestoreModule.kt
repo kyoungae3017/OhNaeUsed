@@ -3,6 +3,7 @@ package com.kyoungae.ohnaejunggo.di
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,14 @@ class FirestoreModule {
 
     @Singleton
     @Provides
-    fun provideFirestore(): FirebaseFirestore {
+    fun provideFirebaseStore(): FirebaseFirestore {
         return Firebase.firestore
     }
+
+    @Singleton
+    @Provides
+    fun provideFirebaseStorage(): FirebaseStorage {
+        return FirebaseStorage.getInstance()
+    }
+
 }

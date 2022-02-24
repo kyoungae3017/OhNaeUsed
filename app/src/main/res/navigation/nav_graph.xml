@@ -12,44 +12,20 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true"
-            app:destination="@id/mainFragment" />
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.kyoungae.ohnaejunggo.fragment.LoginFragment">
         <action
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true"
             android:id="@+id/action_loginFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.kyoungae.ohnaejunggo.fragment.MainFragment"
-         >
-        <action
-            android:id="@+id/action_mainFragment_to_homeFragment2"
-            app:destination="@id/homeFragment2" />
-        <action
-            android:id="@+id/action_mainFragment_to_chattingFragment"
-            app:destination="@id/chattingFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_myFragment2"
-            app:destination="@id/myFragment2" />
-    </fragment>
-    <fragment
-        android:id="@+id/homeFragment2"
-        android:name="com.kyoungae.ohnaejunggo.fragment.HomeFragment"
-        android:label="HomeFragment" />
-    <fragment
-        android:id="@+id/chattingFragment"
-        android:name="com.kyoungae.ohnaejunggo.fragment.ChattingFragment"
-        android:label="ChattingFragment" />
-    <fragment
-        android:id="@+id/myFragment2"
-        android:name="com.kyoungae.ohnaejunggo.fragment.MyFragment"
-        android:label="MyFragment" />
-
+        android:name="com.kyoungae.ohnaejunggo.fragment.MainFragment"></fragment>
 </navigation>

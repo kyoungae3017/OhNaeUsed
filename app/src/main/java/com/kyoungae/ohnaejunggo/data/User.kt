@@ -9,4 +9,7 @@ data class User(
     val id: String? = null,
     val nickname: String? = null,
     val phoneNumber: String? = null,
-    val profileImage: String? = null) : BaseData()
+    val profileImage: String? = null,
+    override val updateDate: String?,
+    override val createDate: String?
+) : BaseData

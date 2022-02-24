@@ -24,6 +24,20 @@
 #-keep class com.kakao.sdk.**.model.* { <fields>; }
 #-keep class * extends com.google.gson.TypeAdapter
 
+#네아
 -keep public class com.nhn.android.naverlogin.** {
        public protected *;
+}
+
+#glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep class * extends com.bumptech.glide.module.AppGlideModule {
+ <init>(...);
+}
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+-keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
+  *** rewind();
 }
