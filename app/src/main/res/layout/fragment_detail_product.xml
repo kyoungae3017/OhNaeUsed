@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginBottom="@dimen/margin_20dp"
+                    android:orientation="horizontal" />
+
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/margin_20dp"
+                    app:dotsColor="@color/gray_light"
+                    app:dotsCornerRadius="@dimen/margin_5dp"
+                    app:dotsSize="@dimen/margin_10dp"
+                    app:dotsSpacing="2.5dp"
+                    app:dotsWidthFactor="0.8"
+                    app:progressMode="false"
+                    app:selectedDotColor="@color/teal_200" />
+
+                <include layout="@layout/view_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/margin_20dp"
+                    android:paddingTop="@dimen/margin_10dp"
+                    android:paddingRight="@dimen/margin_20dp"
+                    android:paddingBottom="@dimen/margin_10dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="@dimen/margin_40dp"
+                        android:layout_height="@dimen/margin_40dp"
+                        android:layout_marginRight="@dimen/margin_10dp"
+                        android:src="@drawable/ic_person"
+                        app:civ_border_color="@color/gray"
+                        app:civ_border_width="1dp" />
+
+                    <TextView
+                        android:id="@+id/nickname"
+                        style="@style/TextMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="아이디" />
+
+                </LinearLayout>
+
+                <include layout="@layout/view_line" />
+
+                <LinearLayout
+                    android:id="@+id/parent_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_20dp">
+
+                    <TextView
+                        android:id="@+id/title"
+                        style="@style/TextLarge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_5dp"
+                        android:hint="제목"
+                        android:maxLines="1"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/update_date"
+                        style="@style/TextSmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="날짜"
+                        android:paddingBottom="@dimen/margin_20dp"
+                        android:textColor="@color/gray" />
+
+                    <include layout="@layout/view_line" />
+
+                    <TextView
+                        android:id="@+id/explanation"
+                        style="@style/TextMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="top|left"
+                        android:hint="설명"
+                        android:paddingTop="@dimen/margin_20dp"
+                        android:paddingBottom="@dimen/margin_20dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <include layout="@layout/view_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_60dp"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/margin_20dp"
+                android:paddingTop="@dimen/margin_10dp"
+                android:paddingRight="@dimen/margin_20dp"
+                android:paddingBottom="@dimen/margin_10dp">
+
+                <TextView
+                    android:layout_marginRight="@dimen/margin_20dp"
+                    android:id="@+id/price"
+                    style="@style/TextMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/price" />
+
+                <ImageButton
+                    android:layout_marginRight="@dimen/margin_5dp"
+                    android:id="@+id/call_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:padding="@dimen/margin_10dp"
+                    android:src="@drawable/ic_call" />
+
+                <ImageButton
+                    android:id="@+id/sms_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:padding="@dimen/margin_10dp"
+                    android:src="@drawable/ic_sms" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

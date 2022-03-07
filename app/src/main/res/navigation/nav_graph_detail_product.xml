@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_writing_product"
+    app:startDestination="@id/productDetailFragment">
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.kyoungae.ohnaejunggo.fragment.ProductDetailFragment"
+        android:label="ProductDetailFragment" >
+        <argument app:nullable="true"
+            android:name="productId"
+            app:argType="string"/>
+    </fragment>
+</navigation>

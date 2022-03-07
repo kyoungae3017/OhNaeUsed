@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.kyoungae.ohnaejunggo.R
 import com.kyoungae.ohnaejunggo.adapter.GalleryAdapter
 import com.kyoungae.ohnaejunggo.adapter.PickedPhotoAdapter
+import com.kyoungae.ohnaejunggo.data.Image
 import com.kyoungae.ohnaejunggo.databinding.*
 import com.kyoungae.ohnaejunggo.util.PICKED_PHOTOS
 import com.kyoungae.ohnaejunggo.viewmodel.GalleryViewModel
@@ -74,7 +75,11 @@ class GalleryFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_complete -> {
-                findNavController().previousBackStackEntry?.savedStateHandle?.set(PICKED_PHOTOS, viewModel.pickedPhotos)
+                val images = mutableListOf<Image>()
+                viewModel.pickedPhotos?.map {
+                    images.add(Image(it.contentUri))
+                }
+                findNavController().previousBackStackEntry?.savedStateHandle?.set(PICKED_PHOTOS, images)
                 findNavController().popBackStack()
                 true
             }

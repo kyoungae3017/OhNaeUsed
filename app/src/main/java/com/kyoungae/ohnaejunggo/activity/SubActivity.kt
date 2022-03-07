@@ -16,6 +16,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
 import com.kyoungae.ohnaejunggo.databinding.ActivitySubBinding
 import com.kyoungae.ohnaejunggo.util.GRAPH_ID
+import kotlin.math.log
 
 
 @AndroidEntryPoint
@@ -41,6 +42,26 @@ class SubActivity : AppCompatActivity() {
         setSupportActionBar(binding.viewToolbar.toolbar)
         binding.viewToolbar.toolbar.setupWithNavController(navController, appBarConfiguration)
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart: ")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop: ")
     }
 
     override fun onSupportNavigateUp(): Boolean {

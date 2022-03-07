@@ -25,4 +25,12 @@
             app:argType="integer"
             android:defaultValue="5"/>
     </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.kyoungae.ohnaejunggo.fragment.ProductDetailFragment"
+        android:label="ProductDetailFragment" >
+        <argument android:name="product_id"
+            app:argType="string"
+            android:defaultValue=""/>
+    </fragment>
 </navigation>

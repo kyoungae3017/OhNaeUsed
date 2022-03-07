@@ -2,6 +2,7 @@ package com.kyoungae.ohnaejunggo.repository
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import com.google.firebase.firestore.ktx.toObject
 import com.kyoungae.ohnaejunggo.LoginType
 import com.kyoungae.ohnaejunggo.data.LoginLocalDataSource
@@ -37,6 +38,7 @@ class LoginRepository @Inject constructor(
     suspend fun getUser(loginType: LoginType, userId: String): User? {
         val documentData = loginRemoteDataSource.getUser(loginType, userId)
         documentData ?: return null
+        Log.d(TAG, "getUser: ${documentData.id}")
         saveLoginStatus(documentData.id)
         return documentData.toObject<User>()
     }

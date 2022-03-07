@@ -1,0 +1,24 @@
+<vector android:height="40dp" android:viewportHeight="800"
+    android:viewportWidth="800" android:width="40dp"
+    xmlns:aapt="http://schemas.android.com/aapt" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#1c8adb" android:fillType="evenOdd"
+        android:pathData="M400,400m-400,0a400,400 0,1 1,800 0a400,400 0,1 1,-800 0" android:strokeWidth="0"/>
+    <group>
+        <clip-path android:pathData="M400,400m-400,0a400,400 0,1 1,800 0a400,400 0,1 1,-800 0"/>
+        <path
+            android:pathData="m399.99,234.11c-26.671,0 -50.742,11.129 -67.826,28.994l-300.03,300.03c69.567,143.89 174.46,208.29 297.23,232.48l229.73,-229.73c0.044,-0.837 0.082,-1.676 0.113,-2.514 -0.035,-58.365 -28.352,-112.59 -74.93,-143.48h-0.029c-20.988,19.279 -47.874,30.736 -76.148,32.619 0.005,-0.005 0.01,-0.01 0.016,-0.016l56.719,-56.717c17.865,-17.084 28.993,-41.157 28.992,-67.828 -0,-51.824 -42.012,-93.836 -93.836,-93.836z" android:strokeWidth="0">
+            <aapt:attr name="android:fillColor">
+                <gradient android:endX="158" android:endY="699"
+                    android:startX="419.5" android:startY="437.5" android:type="linear">
+                    <item android:color="#6B000000" android:offset="0"/>
+                    <item android:color="#00000000" android:offset="1"/>
+                </gradient>
+            </aapt:attr>
+        </path>
+    </group>
+    <group>
+        <clip-path android:pathData="M400,400m-400,0a400,400 0,1 1,800 0a400,400 0,1 1,-800 0"/>
+        <path android:fillColor="#fff"
+            android:pathData="m399.99,234.11c-51.824,0 -93.835,42.012 -93.835,93.835 -0.001,51.824 42.011,93.837 93.835,93.837 51.824,-0 93.836,-42.013 93.835,-93.837 -0,-51.824 -42.012,-93.835 -93.835,-93.835zM484.248,419.89c-22.985,21.114 -53.047,32.853 -84.258,32.901 -31.166,-0.057 -61.183,-11.769 -84.151,-32.835 -46.6,30.851 -74.96,85.053 -75.04,143.42 0.031,0.838 0.069,1.675 0.112,2.513h318.18c0.044,-0.837 0.081,-1.675 0.113,-2.513 -0.035,-58.365 -28.354,-112.59 -74.931,-143.48z" android:strokeWidth="0"/>
+    </group>
+</vector>

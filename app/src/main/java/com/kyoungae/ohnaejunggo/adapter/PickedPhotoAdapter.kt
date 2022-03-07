@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -54,9 +55,19 @@ class PickedPhotoAdapter(
 
             if (item.isVisible) {
                 binding.parentLayout.visibility = View.VISIBLE
+
+                var loadImage: String
+
+                if (item.localPathName.isNullOrEmpty()) {
+                    loadImage = item.url!!
+                }else{
+                    loadImage = item.localPathName
+                }
+
                 Glide.with(binding.root)
-                    .load(item.localPathName)
+                    .load(loadImage)
                     .into(binding.imageView)
+
             } else {
                 binding.parentLayout.visibility = View.GONE
                 val params: ViewGroup.LayoutParams = binding.parentLayout.layoutParams

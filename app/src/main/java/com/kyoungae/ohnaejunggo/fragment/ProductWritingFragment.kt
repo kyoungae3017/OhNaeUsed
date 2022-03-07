@@ -1,5 +1,6 @@
 package com.kyoungae.ohnaejunggo.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -23,6 +24,8 @@ import com.kyoungae.ohnaejunggo.viewmodel.ProductWritingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
+import com.kyoungae.ohnaejunggo.activity.SubActivity
+import com.kyoungae.ohnaejunggo.data.Image
 import com.kyoungae.ohnaejunggo.util.*
 
 
@@ -90,7 +93,7 @@ class ProductWritingFragment : Fragment() {
             viewModel.checkValidValue()
         })
 
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<MutableList<Gallery>>(
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<MutableList<Image>>(
             PICKED_PHOTOS
         )?.observe(viewLifecycleOwner) {
             viewModel.addPickedPhotos(it)
@@ -100,10 +103,19 @@ class ProductWritingFragment : Fragment() {
         viewModel.isCreateProduct.observe(viewLifecycleOwner, {
             if (it) {
                 binding.progressbar.visibility = View.GONE
-                Log.d(TAG, "onViewCreated: 다음화면으로 이동")
+                goToProductDetailFragment(viewModel.productId)
             } else {
                 CommonUtil.showSnackbarOfUnknownIssues(binding.parentLayout)
             }
+        })
+
+        viewModel.productData.observe(viewLifecycleOwner, { product ->
+            val transImages = viewModel.productImagesToLocalImages(product.imagePaths!!)
+            viewModel.getImageDataAddPickedPhoto(transImages)
+            adapter.submitList(viewModel.pickedPhotos)
+            binding.title.setText(product.title)
+            binding.price.setText(product.price.toString())
+            binding.explanation.setText(product.explanation)
         })
     }
 
@@ -115,6 +127,7 @@ class ProductWritingFragment : Fragment() {
         super.onPrepareOptionsMenu(menu)
         val item = menu.findItem(R.id.action_complete)
         item.isVisible = isValidValue
+        Log.d(TAG, "onPrepareOptionsMenu: $isValidValue")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -139,9 +152,10 @@ class ProductWritingFragment : Fragment() {
 
     private fun initEditTextView() {
         binding.price.addTextChangedListener { text ->
-            if (text.toString() != "0") {
-                val price = text.toString() as? Long ?: 0
-                viewModel.price = price
+            val textString: String = text.toString()
+            if (textString!= "0" && textString.isNotEmpty()) {
+                Log.d(TAG, "initEditTextView: ${textString.removeComma()}")
+                viewModel.price = textString.removeComma().toLong()
                 viewModel.checkValidValue()
             }
         }
@@ -179,6 +193,21 @@ class ProductWritingFragment : Fragment() {
                 length
             )
         )
+    }
+
+    private fun goToProductDetailFragment() {
+        val intent = Intent(context, SubActivity::class.java).apply {
+            putExtra(GRAPH_ID, R.navigation.nav_graph_writing_product)
+            putExtra(PRODUCT_ID, viewModel.productId)
+        }
+        startActivity(intent)
+    }
+
+    private fun goToProductDetailFragment(productId: String) {
+        findNavController().navigateUp() // to clear previous navigation history
+
+        val bundle = bundleOf(PRODUCT_ID to productId)
+        findNavController().navigate(R.id.productDetailFragment, bundle)
     }
 
     companion object {

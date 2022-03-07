@@ -78,7 +78,15 @@ class LoginRemoteDataSource @Inject constructor(
 
                 if (profileApi == null) cont.resume(null)
                 val profile = gson.fromJson(profileApi, ProfileResponse::class.java).response
-                val user = User(LoginType.NAVER, profile.id, profile.nickname, profile.mobile, null,null,CommonUtil.getCurrentTime())
+                val user = User(
+                    LoginType.NAVER,
+                    profile.id,
+                    profile.nickname,
+                    profile.mobile,
+                    null,
+                    CommonUtil.getCurrentTime(),
+                    null
+                )
                 cont.resume(user)
             } catch (e: Exception) {
                 cont.resume(null)

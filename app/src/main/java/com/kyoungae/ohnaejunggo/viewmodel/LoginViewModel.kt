@@ -43,7 +43,6 @@ class LoginViewModel @Inject constructor(
                         if (getServerUserData != null) {
                             changeSucceedLoginData(this, true)
                         } else {
-
                             changeSucceedLoginData(this, userRepository.insertUser(naverUserData))
                         }
                     } else {

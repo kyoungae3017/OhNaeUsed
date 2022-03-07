@@ -1,6 +1,5 @@
 package com.kyoungae.ohnaejunggo.repository
 
-import android.widget.ImageView
 import com.kyoungae.ohnaejunggo.data.*
 import javax.inject.Inject
 
@@ -11,13 +10,28 @@ class ProductRepository @Inject constructor(
         return productDataSource.uploadImage(index, image, uploadUrl)
     }
 
-    suspend fun create(product: Product): Boolean {
+    suspend fun create(product: Product): String {
         return productDataSource.create(product)
     }
 
-    suspend fun saveBitmapToJpeg(index: Int, gallery: Gallery): Image {
-        return productDataSource.saveBitmapToJpeg(index, gallery)
+    suspend fun saveBitmapToJpeg(index: Int, image: Image): Image {
+        return productDataSource.saveBitmapToJpeg(index, image)
     }
 
+    suspend fun update(documentId: String, product: Product): Boolean {
+    return productDataSource.update(documentId, product)
+    }
+
+    suspend fun getProductData(documentId: String): Product? {
+        return productDataSource.getProductData(documentId)
+    }
+
+    suspend fun getUserData(documentId: String): User? {
+        return productDataSource.getUserData(documentId)
+    }
+
+    suspend fun delete(documentId: String): Boolean {
+        return productDataSource.delete(documentId)
+    }
 
 }

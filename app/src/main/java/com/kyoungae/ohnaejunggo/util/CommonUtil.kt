@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.Timestamp
 import com.kyoungae.ohnaejunggo.R
 import java.io.File
 import java.io.FileNotFoundException
@@ -23,6 +24,7 @@ import java.io.IOException
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.time.Duration.Companion.seconds
 
 class CommonUtil {
     companion object {
@@ -84,6 +86,10 @@ class CommonUtil {
             val currentTime = System.currentTimeMillis()
             val dataFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.KOREAN).format(currentTime)
             return dataFormat
+        }
+
+        fun Timestamp.makeDateFormat(): String{
+            return SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date(this.seconds*1000))
         }
 
         private const val TAG = "CommonUtil"

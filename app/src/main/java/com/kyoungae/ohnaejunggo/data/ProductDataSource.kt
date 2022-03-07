@@ -4,32 +4,19 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
-import android.provider.MediaStore
 import android.util.Log
-import android.widget.ImageView
-import androidx.annotation.BinderThread
-import androidx.annotation.RequiresApi
-import androidx.compose.ui.geometry.Size
-import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.kyoungae.ohnaejunggo.util.CommonUtil
 import javax.inject.Inject
 import com.kyoungae.ohnaejunggo.util.USER
-import com.kyoungae.ohnaejunggo.viewmodel.ProductWritingViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.io.*
-import java.text.SimpleDateFormat
 
-import java.util.*
 import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 
 class ProductDataSource @Inject constructor(
@@ -61,13 +48,14 @@ class ProductDataSource @Inject constructor(
         }
     }
 
-    suspend fun create(product: Product): Boolean {
+    suspend fun create(product: Product): String {
 
-        val result = suspendCancellableCoroutine<Boolean> { cont ->
+        val result = suspendCancellableCoroutine<String> { cont ->
             firebaseFirestore.collection(PRODUCT)
                 .add(product)
-                .addOnSuccessListener { cont.resume(true) }
-                .addOnFailureListener { cont.resume(false) }
+                .addOnSuccessListener { documentReference ->
+                    cont.resume(documentReference.id) }
+                .addOnFailureListener { cont.resume("") }
         }
         return result
     }
@@ -82,6 +70,7 @@ class ProductDataSource @Inject constructor(
             productData["title"] = product.title
             productData["price"] = product.price
             productData["explanation"] = product.explanation
+            productData["updateDate"] = product.updateDate
 
             firebaseFirestore.collection(USER).document(documentId)
                 .update(productData)
@@ -91,12 +80,27 @@ class ProductDataSource @Inject constructor(
         return result
     }
 
-    suspend fun getData(documentId: String): User? {
-        val result = suspendCancellableCoroutine<User?> { cont ->
+    suspend fun getProductData(documentId: String): Product? {
+        val result = suspendCancellableCoroutine<Product?> { cont ->
             firebaseFirestore.collection(PRODUCT).document(documentId)
                 .get()
                 .addOnSuccessListener {
-                    val user = it.toObject(User::class.java) as User
+                    val product = it.toObject<Product>()
+                    cont.resume(product)
+                }
+                .addOnFailureListener {
+                    cont.resume(null)
+                }
+        }
+        return result
+    }
+
+    suspend fun getUserData(documentId: String): User? {
+        val result = suspendCancellableCoroutine<User?> { cont ->
+            firebaseFirestore.collection(USER).document(documentId)
+                .get()
+                .addOnSuccessListener {
+                    val user = it.toObject<User>()
                     cont.resume(user)
                 }
                 .addOnFailureListener {
@@ -116,9 +120,9 @@ class ProductDataSource @Inject constructor(
         return result
     }
 
-    suspend fun saveBitmapToJpeg(index: Int, gallery: Gallery): Image {
+    suspend fun saveBitmapToJpeg(index: Int, image: Image): Image {
 
-        var bitmap = BitmapFactory.decodeFile(gallery.contentUri)
+        var bitmap = BitmapFactory.decodeFile(image.localPathName)
 
         val maximagesize = 1000 * 800 // 저용량 변환중 최대 사이즈
         var realimagesize: Int = maximagesize
